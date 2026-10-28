@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071b35">
+  <title>Atlético Márquez | Pasión que nos une</title>
+  <style>
+    :root {
+      --navy: #071b35;
+      --blue: #123f78;
+      --gold: #f4bd45;
+      --white: #f7f9fc;
+      --muted: #b9c5d6;
+      --panel: #102947;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1120px, 92%); margin: auto; }
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(7, 27, 53, .95);
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(10px);
+    }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; letter-spacing: .5px; }
+    .crest {
+      width: 46px; height: 52px; display: grid; place-items: center;
+      background: linear-gradient(145deg, var(--gold), #ffe6a2);
+      color: var(--navy); font-size: 1.2rem; font-weight: 1000;
+      clip-path: polygon(8% 0,92% 0,100% 12%,88% 76%,50% 100%,12% 76%,0 12%);
+      border: 2px solid white;
+    }
+    .brand small { display: block; color: var(--gold); font-size: .68rem; letter-spacing: 2px; }
+    nav { display: flex; align-items: center; gap: 24px; }
+    nav a { font-size: .93rem; color: var(--muted); transition: color .2s; }
+    nav a:hover { color: var(--gold); }
+    .menu-btn { display: none; background: transparent; border: 1px solid #496078; color: white; border-radius: 8px; padding: 8px 12px; font-size: 1.2rem; }
+    .hero {
+      min-height: 590px; display: flex; align-items: center; position: relative; overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(7,27,53,.98) 0%, rgba(7,27,53,.82) 48%, rgba(7,27,53,.25) 100%),
+        url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1800&q=85') center/cover;
+    }
+    .hero::after { content: ""; position: absolute; inset: auto 0 0; height: 7px; background: var(--gold); }
+    .hero-content { position: relative; z-index: 1; max-width: 700px; padding: 80px 0 95px; }
+    .eyebrow { color: var(--gold); text-transform: uppercase; letter-spacing: 3px; font-size: .8rem; font-weight: 800; }
+    h1 { font-size: clamp(2.8rem, 7vw, 5.6rem); line-height: .99; margin: 18px 0 22px; letter-spacing: -2px; }
+    h1 span { color: var(--gold); }
+    .hero p { color: #e0e7f1; max-width: 540px; font-size: 1.1rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 20px; border-radius: 7px; font-weight: 800; transition: transform .2s, background .2s; cursor: pointer; border: 0; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--gold); color: var(--navy); }
+    .btn-outline { border: 1px solid rgba(255,255,255,.65); color: white; }
+    section { padding: 78px 0; }
+    .section-head { margin-bottom: 32px; }
+    .section-head h2 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; margin-top: 8px; }
+    .section-head p { color: var(--muted); margin-top: 12px; max-width: 650px; }
+    .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: -34px; position: relative; z-index: 2; }
+    .stat { background: var(--panel); border: 1px solid rgba(255,255,255,.1); border-top: 3px solid var(--gold); border-radius: 10px; padding: 24px; text-align: center; }
+    .stat strong { display: block; color: var(--gold); font-size: 1.8rem; }
+    .stat span { color: var(--muted); font-size: .9rem; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 42px; align-items: center; }
+    .about-photo { min-height: 360px; border-radius: 14px; background: url('https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=1200&q=85') center/cover; box-shadow: 14px 14px 0 var(--blue); }
+    .about-copy p { color: var(--muted); margin: 16px 0; }
+    .values { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .values span { border: 1px solid rgba(244,189,69,.5); color: var(--gold); border-radius: 99px; padding: 7px 13px; font-size: .88rem; }
+    .dark-section { background: #0b2341; }
+    .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .player { background: var(--panel); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; overflow: hidden; }
+    .player-art { height: 210px; display: grid; place-items: center; background: linear-gradient(135deg, #1c4e86, #071b35); font-size: 5rem; }
+    .player-info { padding: 18px; }
+    .player-info small { color: var(--gold); font-weight: 800; letter-spacing: 1px; }
+    .player-info h3 { font-size: 1.25rem; margin: 5px 0; }
+    .player-info p { color: var(--muted); font-size: .9rem; }
+    .fixture-wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; }
+    .fixture, .notice { background: var(--panel); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 24px; }
+    .fixture-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,.1); text-align: center; }
+    .fixture-row:last-child { border-bottom: 0; }
+    .team { font-weight: 800; }
+    .team small { display: block; color: var(--muted); font-weight: 400; font-size: .78rem; }
+    .vs { color: var(--gold); font-weight: 900; }
+    .notice p { color: var(--muted); margin: 12px 0 20px; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+    .contact-copy p { color: var(--muted); margin: 12px 0; }
+    form { display: grid; gap: 12px; }
+    input, textarea { width: 100%; padding: 13px 14px; background: #0b2341; color: white; border: 1px solid #36516f; border-radius: 7px; font: inherit; }
+    input:focus, textarea:focus { outline: 2px solid var(--gold); border-color: transparent; }
+    textarea { resize: vertical; min-height: 120px; }
+    #form-message { color: var(--gold); min-height: 1.4em; font-size: .9rem; }
+    footer { padding: 25px 0; border-top: 1px solid rgba(255,255,255,.1); color: var(--muted); font-size: .88rem; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .gold { color: var(--gold); }
+    @media (max-width: 760px) {
+      .menu-btn { display: block; }
+      nav { display: none; position: absolute; top: 76px; left: 0; right: 0; padding: 20px 4%; background: var(--navy); flex-direction: column; align-items: flex-start; border-bottom: 1px solid #29425f; }
+      nav.open { display: flex; }
+      .hero { min-height: 520px; background-position: 60% center; }
+      .stats { grid-template-columns: 1fr; margin-top: 20px; }
+      .about-grid, .fixture-wrap, .contact-grid { grid-template-columns: 1fr; }
+      .about-photo { min-height: 260px; }
+      .cards { grid-template-columns: 1fr; }
+      section { padding: 58px 0; }
+      .fixture-row { gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#inicio" aria-label="Atlético Márquez, inicio">
+        <span class="crest">AM</span>
+        <span>ATLÉTICO MÁRQUEZ<small>UN CLUB · UNA FAMILIA</small></span>
+      </a>
+      <button class="menu-btn" id="menu-btn" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      <nav id="nav">
+        <a href="#inicio">Inicio</a>
+        <a href="#club">El club</a>
+        <a href="#plantel">Plantel</a>
+        <a href="#partidos">Partidos</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container">
+        <div class="hero-content">
+          <div class="eyebrow">Orgullo · Pasión · Compromiso</div>
+          <h1>JUGAMOS CON<br><span>EL CORAZÓN.</span></h1>
+          <p>Somos Atlético Márquez: un equipo que lucha cada balón, cree en su gente y nunca deja de soñar. ¡Esta camiseta se defiende con orgullo!</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#club">Conoce al club</a>
+            <a class="btn btn-outline" href="#partidos">Ver partidos</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container stats" aria-label="Datos del club">
+      <div class="stat"><strong>AM</strong><span>Nuestra identidad</span></div>
+      <div class="stat"><strong>100%</strong><span>Pasión por el fútbol</span></div>
+      <div class="stat"><strong>1 FAMILIA</strong><span>Unidos dentro y fuera de la cancha</span></div>
+    </div>
+
+    <section id="club">
+      <div class="container about-grid">
+        <div class="about-photo" role="img" aria-label="Campo de fútbol"></div>
+        <div class="about-copy">
+          <div class="section-head">
+            <div class="eyebrow">Más que un equipo</div>
+            <h2>Una pasión que nos une</h2>
+          </div>
+          <p>Atlético Márquez representa esfuerzo, compañerismo y amor por el fútbol. Cada entrenamiento es una oportunidad para mejorar y cada partido, una ocasión para demostrar de qué estamos hechos.</p>
+          <p>Trabajamos juntos, respetamos al rival y defendemos nuestros colores con humildad y determinación.</p>
+          <div class="values"><span>Trabajo en equipo</span><span>Respeto</span><span>Disciplina</span><span>Pasión</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-section" id="plantel">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Nuestros protagonistas</div>
+          <h2>El plantel</h2>
+          <p>La fuerza del equipo está en cada jugador. Aquí puedes colocar los nombres y posiciones de los integrantes de Atlético Márquez.</p>
+        </div>
+        <div class="cards">
+          <article class="player">
+            <div class="player-art" aria-hidden="true">🧤</div>
+            <div class="player-info"><small>PORTERO</small><h3>Nombre del jugador</h3><p>Seguridad bajo los tres palos.</p></div>
+          </article>
+          <article class="player">
+            <div class="player-art" aria-hidden="true">🛡️</div>
+            <div class="player-info"><small>DEFENSA</small><h3>Nombre del jugador</h3><p>Firmeza, concentración y entrega.</p></div>
+          </article>
+          <article class="player">
+            <div class="player-art" aria-hidden="true">⚽</div>
+            <div class="player-info"><small>DELANTERO</small><h3>Nombre del jugador</h3><p>Velocidad y hambre de gol.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="partidos">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">La próxima cita</div>
+          <h2>Partidos y novedades</h2>
+          <p>Actualiza esta sección con el calendario real de tu equipo.</p>
+        </div>
+        <div class="fixture-wrap">
+          <div class="fixture">
+            <div class="fixture-row">
+              <div class="team">Atlético Márquez<small>Local</small></div>
+              <div class="vs">VS</div>
+              <div class="team">Equipo rival<small>Visitante</small></div>
+            </div>
+            <p style="color:var(--muted);text-align:center;padding-top:12px">Fecha: por confirmar · Hora: por confirmar</p>
+          </div>
+          <aside class="notice">
+            <div class="eyebrow">¡Atención, hinchada!</div>
+            <h3 style="font-size:1.4rem;margin-top:8px">Apoya al Atlético</h3>
+            <p>Ven a alentar al equipo y comparte la pasión por nuestros colores. Pronto publicaremos aquí los horarios, resultados y novedades oficiales.</p>
+            <a class="btn btn-primary" href="#contacto">Contáctanos</a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-section" id="contacto">
+      <div class="container contact-grid">
+        <div class="contact-copy">
+          <div class="section-head">
+            <div class="eyebrow">Conectemos</div>
+            <h2>Forma parte de la familia</h2>
+          </div>
+          <p>¿Quieres probarte en el equipo, colaborar o conocer nuestros próximos partidos? Escríbenos.</p>
+          <p><strong class="gold">Club:</strong> Atlético Márquez</p>
+          <p><strong class="gold">Redes sociales:</strong> agrega aquí tus enlaces oficiales.</p>
+        </div>
+        <form id="contact-form">
+          <input type="text" name="nombre" placeholder="Tu nombre" aria-label="Tu nombre" required>
+          <input type="email" name="email" placeholder="Tu correo electrónico" aria-label="Tu correo electrónico" required>
+          <textarea name="mensaje" placeholder="Escribe tu mensaje..." aria-label="Tu mensaje" required></textarea>
+          <button class="btn btn-primary" type="submit">Preparar mensaje</button>
+          <p id="form-message" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Atlético Márquez. Todos los derechos reservados.</span>
+      <span>Hecho con <span class="gold">♥</span> por la hinchada.</span>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.getElementById('menu-btn');
+    const nav = document.getElementById('nav');
+    menuButton.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.textContent = open ? '✕' : '☰';
+    });
+    nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      nav.classList.remove('open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.textContent = '☰';
+    }));
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    document.getElementById('contact-form').addEventListener('submit', event => {
+      event.preventDefault();
+      const data = new FormData(event.target);
+      const subject = encodeURIComponent('Contacto para Atlético Márquez');
+      const body = encodeURIComponent(
+        `Nombre: ${data.get('nombre')}\nCorreo: ${data.get('email')}\n\nMensaje:\n${data.get('mensaje')}`
+      );
+      document.getElementById('form-message').textContent =
+        'Se abrirá tu aplicación de correo para que puedas enviar el mensaje.';
+      window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
